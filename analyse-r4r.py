@@ -23,3 +23,4 @@ def spider_pages(x):
         # place in list and loop again with new url
         r4r_allpages.append(next_page)
         start_url = next_page
+    return r4r4r_allpages
