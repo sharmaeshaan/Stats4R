@@ -7,7 +7,7 @@ def spider_pages(x):
     # initialize sqlite db and create table
     conn_1 = sqlite3.connect('r4r_pages.sqlite')
     cur_1 = conn_1.cursor()
-    cur_1.execute('CREATE TABLE IF NOT EXISTS pages_list (id INTEGER PRIMARY KEY AUTOINCREMENT, page_url BLOB)')
+    cur_1.execute('CREATE TABLE IF NOT EXISTS pages_list (id INTEGER PRIMARY KEY AUTOINCREMENT, page_url BLOB, page_html BLOB)')
 
     start_url = x
     print("Spider initialized at ", start_url)
@@ -24,13 +24,14 @@ def spider_pages(x):
 
         # requests module fetches page as bytes so .text needed to convert to text
         soup = BeautifulSoup(get_start_url.text, 'html.parser')
+        soup_text = str(soup.prettify())
         span_tag = soup.find('span', class_='next-button')
         a_tag = span_tag.find('a')
         next_page = str(a_tag.attrs['href'])
         print(next_page)
 
         # place in db and loop again with new url
-        cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url) VALUES (?)', (next_page, ))
+        cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (next_page, soup_text, ))
         start_url = next_page
     conn_1.commit()
 
