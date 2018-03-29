@@ -16,7 +16,7 @@ def spider_pages(x):
 
     # target server will block requests from program without user agent details
     set_header = {'user-agent':'r4r-analysis'}
-    crawl_count = 20
+    crawl_count = 10
     while crawl_count > 0:
         time.sleep(0.25)
         crawl_count = crawl_count -1
