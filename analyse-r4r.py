@@ -14,4 +14,4 @@ def spider_pages(x):
     soup = BeautifulSoup(get_start_url.text, 'html.parser')
     span_tag = soup.find('span', class_='next-button')
     a_tag = span_tag.find('a')
-    next_button = a_tag.attrs['href']
+    next_button = str(a_tag.attrs['href'])
