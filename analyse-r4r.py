@@ -32,5 +32,6 @@ def spider_pages(x):
         # place in db and loop again with new url
         cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url) VALUES (?)', (next_page, ))
         start_url = next_page
+    conn_1.commit()
 
 spider_pages("https://www.reddit.com/r/r4r")
