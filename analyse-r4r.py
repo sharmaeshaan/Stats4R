@@ -11,18 +11,20 @@ def spider_pages(x):
 
     start_url = x
     print("Spider initialized at ", start_url)
-    # place first link in db
-    cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url) VALUES (?)', (start_url, ))
-
+    # manually place first link and page html in db
     # target server will block requests from program without user agent details
     set_header = {'user-agent':'r4r-analysis'}
+    get_start_url = requests.get(start_url, headers = set_header)
+    # requests module fetches page as bytes so .text needed to convert to text
+    soup = BeautifulSoup(get_start_url.text, 'html.parser')
+    soup_text = str(soup.prettify())
+    cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (start_url, soup_text, ))
+
     crawl_count = 10
     while crawl_count > 0:
         time.sleep(0.25)
         crawl_count = crawl_count -1
         get_start_url = requests.get(start_url, headers = set_header)
-
-        # requests module fetches page as bytes so .text needed to convert to text
         soup = BeautifulSoup(get_start_url.text, 'html.parser')
         soup_text = str(soup.prettify())
         span_tag = soup.find('span', class_='next-button')
