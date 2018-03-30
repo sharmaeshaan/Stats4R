@@ -3,8 +3,11 @@ from bs4 import BeautifulSoup
 import sqlite3
 import time
 
+
 conn_1 = sqlite3.connect('r4r_pages.sqlite')
 cur_1 = conn_1.cursor()
+conn_2 = sqlite3.connect('r4r_posts.sqlite')
+cur_2 = conn_2.cursor()
 
 def spider_pages(x):
     # create first table
@@ -40,7 +43,9 @@ def spider_pages(x):
     conn_1.commit()
 
 def scrape_posts():
-    # fetch downloaded pages from db
+    # create second table
+    cur_2.execute('CREATE TABLE IF NOT EXISTS posts_list (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB UNIQUE)')
+    # fetch downloaded pages from first db
     pages = cur_1.execute('SELECT page_url, page_html FROM pages_list')
     for i in pages:
         page_url = i[0]
@@ -51,12 +56,23 @@ def scrape_posts():
         for x in r4r_post_divs:
             try:
                 r4r_post_atag = x.find('a', class_='title may-blank ')
-                post_url = str('https://www.reddit.com'+atag.attrs['href'])
-                post_title_contents = str(atag.contents[0]).strip()
+                # extract posts url and title content
+                post_url = str('https://www.reddit.com'+r4r_post_atag.attrs['href'])
+                post_title_contents = str(r4r_post_atag.contents[0]).strip()
+                print(post_url)
+                print(post_title_contents)
                 time.sleep(1)
+                # table inserts inside 'try/except' since unique constraint on post title can glitch
+                try:
+                    cur_2.execute('''
+                    INSERT OR IGNORE INTO posts_list (post_url, post_title) VALUES (?, ?)
+                    ''', (post_url, post_title_contents, ))
+                    conn_2.commit()
+                    print('Inserted')
+                except:
+                    print('Cannot insert in DB. Oh well, moving on...')
             except:
-                print('Oops, cannot process <div>. Moving on...')
-
+                print('Oops, cannot process <div>, moving on...')
 
 # spider_pages("https://www.reddit.com/r/r4r")
 scrape_posts()
