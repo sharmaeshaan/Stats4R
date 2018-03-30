@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import sqlite3
 import time
 
-
+# setup databases
 conn_1 = sqlite3.connect('r4r_pages.sqlite')
 cur_1 = conn_1.cursor()
 conn_2 = sqlite3.connect('r4r_posts.sqlite')
@@ -24,9 +24,9 @@ def spider_pages(x):
     soup_text = str(soup.prettify())
     cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (start_url, soup_text, ))
 
-    crawl_count = 10
+    crawl_count = 400
     while crawl_count > 0:
-        time.sleep(0.25)
+        time.sleep(0.10)
         crawl_count = crawl_count -1
         get_start_url = requests.get(start_url, headers = set_header)
         soup = BeautifulSoup(get_start_url.text, 'html.parser')
@@ -36,7 +36,7 @@ def spider_pages(x):
         a_tag = span_tag.find('a')
         next_page = str(a_tag.attrs['href'])
         print(next_page)
-
+        print('Spidering onwards...')
         # place in db and loop again with new url
         cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (next_page, soup_text, ))
         start_url = next_page
@@ -47,32 +47,34 @@ def scrape_posts():
     cur_2.execute('CREATE TABLE IF NOT EXISTS posts_list (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB UNIQUE)')
     # fetch downloaded pages from first db
     pages = cur_1.execute('SELECT page_url, page_html FROM pages_list')
+
     for i in pages:
         page_url = i[0]
         page_html = i[1]
         soup = BeautifulSoup(page_html, 'html.parser')
         # structure is div : entry unvoted >>> a : title may-blank
         r4r_post_divs = soup.find_all('div', class_='entry unvoted')
+
         for x in r4r_post_divs:
             try:
                 r4r_post_atag = x.find('a', class_='title may-blank ')
                 # extract posts url and title content
                 post_url = str('https://www.reddit.com'+r4r_post_atag.attrs['href'])
                 post_title_contents = str(r4r_post_atag.contents[0]).strip()
-                print(post_url)
+                print('Scraping: ', post_url)
                 print(post_title_contents)
-                time.sleep(1)
+                # time.sleep(1)
                 # table inserts inside 'try/except' since unique constraint on post title can glitch
                 try:
                     cur_2.execute('''
                     INSERT OR IGNORE INTO posts_list (post_url, post_title) VALUES (?, ?)
                     ''', (post_url, post_title_contents, ))
                     conn_2.commit()
-                    print('Inserted')
+                    print('--Inserted--')
                 except:
-                    print('Cannot insert in DB. Oh well, moving on...')
+                    print('***Cannot insert in DB. Oh well, moving on...***')
             except:
-                print('Oops, cannot process <div>, moving on...')
+                print('***Oops, cannot process <div>, moving on...***')
 
 # spider_pages("https://www.reddit.com/r/r4r")
 scrape_posts()
