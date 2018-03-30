@@ -24,23 +24,31 @@ def spider_pages(x):
     soup_text = str(soup.prettify())
     cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (start_url, soup_text, ))
 
-    crawl_count = 400
-    while crawl_count > 0:
-        time.sleep(0.10)
-        crawl_count = crawl_count -1
-        get_start_url = requests.get(start_url, headers = set_header)
-        soup = BeautifulSoup(get_start_url.text, 'html.parser')
-        # download whole page html into soup_text
-        soup_text = str(soup.prettify())
-        span_tag = soup.find('span', class_='next-button')
-        a_tag = span_tag.find('a')
-        next_page = str(a_tag.attrs['href'])
-        print(next_page)
-        print('Spidering onwards...')
-        # place in db and loop again with new url
-        cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (next_page, soup_text, ))
-        start_url = next_page
-    conn_1.commit()
+    # r4r makes 26 pages available max
+    count = 26
+    while count > 0:
+        count = count - 1
+        try:
+            time.sleep(0.10)
+            get_start_url = requests.get(start_url, headers = set_header)
+            soup = BeautifulSoup(get_start_url.text, 'html.parser')
+            # download whole page html into soup_text
+            soup_text = str(soup.prettify())
+            span_tag = soup.find('span', class_='next-button')
+            if str(span_tag) == None:
+                break
+            else:
+                a_tag = span_tag.find('a')
+                next_page = str(a_tag.attrs['href'])
+                print(next_page)
+                print('Spidering onwards...')
+                # place in db and loop again with new url
+                cur_1.execute('INSERT OR IGNORE INTO pages_list (page_url, page_html) VALUES (?, ?)', (next_page, soup_text, ))
+                conn_1.commit()
+                start_url = next_page
+        except:
+            print('Error')
+    print('Spidering pages complete')
 
 def scrape_posts():
     # create second table
@@ -76,5 +84,5 @@ def scrape_posts():
             except:
                 print('***Oops, cannot process <div>, moving on...***')
 
-# spider_pages("https://www.reddit.com/r/r4r")
+spider_pages("https://www.reddit.com/r/r4r")
 scrape_posts()
