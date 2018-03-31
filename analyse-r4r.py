@@ -8,6 +8,8 @@ conn_1 = sqlite3.connect('r4r_pages.sqlite')
 cur_1 = conn_1.cursor()
 conn_2 = sqlite3.connect('r4r_posts.sqlite')
 cur_2 = conn_2.cursor()
+conn_3 = sqlite3.connect('r4r_posts_breakdown.sqlite')
+cur_3 = conn_3.cursor()
 
 def spider_pages(x):
     # create first table
@@ -35,6 +37,7 @@ def spider_pages(x):
             # download whole page html into soup_text
             soup_text = str(soup.prettify())
             span_tag = soup.find('span', class_='next-button')
+            # break loop if spider reaches page with no 'next' button
             if str(span_tag) == None:
                 break
             else:
@@ -84,5 +87,46 @@ def scrape_posts():
             except:
                 print('***Oops, cannot process <div>, moving on...***')
 
-spider_pages("https://www.reddit.com/r/r4r")
-scrape_posts()
+def breakdown_posts():
+    # create third table
+    cur_3.execute('CREATE TABLE IF NOT EXISTS posts_breakdown (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB UNIQUE, age INTEGER, category BLOB, sex BLOB, seeking BLOB)')
+    # fetch posts from second table
+    posts = cur_2.execute('SELECT post_url, post_title FROM posts_list')
+    for i in posts:
+        try:
+            post_url = i[0]
+            post_title = i[1]
+            post_title_split = post_title.split(' ')
+            age = post_title_split[0]
+            category = post_title_split[1]
+            category_split = list(category)
+            location = post_title_split[2]
+            sex = category_split[1]
+            seeking = category_split[3]
+            # time.sleep(1)
+            print(post_title)
+            print(age)
+            print(sex)
+            print(seeking)
+            print('\n\n')
+        except:
+            print('***Oops, could not process post, moving on...***')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+# spider_pages("https://www.reddit.com/r/r4r")
+# scrape_posts()
+breakdown_posts()
