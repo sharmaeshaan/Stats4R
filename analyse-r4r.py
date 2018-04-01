@@ -110,7 +110,7 @@ def breakdown_posts():
         except:
             print('Error processing post category: ', post_title)
             pass
-        time.sleep(1)
+        # time.sleep(1)
         print(post_title)
         print(age)
         print(sex)
