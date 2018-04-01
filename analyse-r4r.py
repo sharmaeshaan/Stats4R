@@ -89,44 +89,36 @@ def scrape_posts():
 
 def breakdown_posts():
     # create third table
-    cur_3.execute('CREATE TABLE IF NOT EXISTS posts_breakdown (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB UNIQUE, age INTEGER, category BLOB, sex BLOB, seeking BLOB)')
+    cur_3.execute('CREATE TABLE IF NOT EXISTS posts_breakdown (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB, age INTEGER, location BLOB, sex BLOB, seeking BLOB)')
     # fetch posts from second table
     posts = cur_2.execute('SELECT post_url, post_title FROM posts_list')
     for i in posts:
+        post_url = i[0]
+        post_title = i[1]
+        post_title_split = post_title.split(' ')
         try:
-            post_url = i[0]
-            post_title = i[1]
-            post_title_split = post_title.split(' ')
             age = post_title_split[0]
-            category = post_title_split[1]
-            category_split = list(category)
+            category = post_title_split[1].lower()
             location = post_title_split[2]
+        except:
+            print('Error processing post title:', post_title)
+            pass
+        try:
+            category_split = list(category)
             sex = category_split[1]
             seeking = category_split[3]
-            # time.sleep(1)
-            print(post_title)
-            print(age)
-            print(sex)
-            print(seeking)
-            print('\n\n')
         except:
-            print('***Oops, could not process post, moving on...***')
+            print('Error processing post category: ', post_title)
+            pass
+        time.sleep(1)
+        print(post_title)
+        print(age)
+        print(sex)
+        print(seeking)
+        print('\n\n')
+        cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking) VALUES (?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, ))
+        conn_3.commit()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#
 # spider_pages("https://www.reddit.com/r/r4r")
 # scrape_posts()
 breakdown_posts()
