@@ -97,7 +97,10 @@ def breakdown_posts():
         post_title = i[1]
         post_title_split = post_title.split(' ')
         try:
-            age = post_title_split[0]
+            age = int(post_title_split[0])
+        except:
+            age = None
+        try:
             category = post_title_split[1].lower()
             location = post_title_split[2]
         except:
