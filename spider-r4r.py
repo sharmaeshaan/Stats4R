@@ -96,6 +96,7 @@ def breakdown_posts():
         post_url = i[0]
         post_title = i[1]
         post_title_split = post_title.split(' ')
+        # if age is int then enter if else then enter null/none
         try:
             age = int(post_title_split[0])
         except:
