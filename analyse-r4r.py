@@ -22,9 +22,15 @@ def mean_age():
     for i in posts():
         ages.append(i[3])
     mean_age = statistics.mean(ages)
-    print(int(mean_age))
+    return int(mean_age)
+
+def m4f():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('m', 'f', ))
+    m4f = cur.fetchall()
+    return len(m4f)
 
 
 posts()
 # sanitise()
-mean_age()
+print(mean_age())
+print(m4f())
