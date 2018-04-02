@@ -115,9 +115,8 @@ def breakdown_posts():
         print(age)
         print(sex)
         print(seeking)
-        print('\n\n')
         cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking) VALUES (?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, ))
-        conn_3.commit()
+    conn_3.commit()
 
 # spider_pages("https://www.reddit.com/r/r4r")
 # scrape_posts()
