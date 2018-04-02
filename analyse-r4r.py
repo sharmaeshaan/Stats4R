@@ -29,8 +29,13 @@ def m4f():
     m4f = cur.fetchall()
     return len(m4f)
 
+def f4m():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('f', 'm', ))
+    f4m = cur.fetchall()
+    return len(f4m)
 
 posts()
 # sanitise()
 print(mean_age())
 print(m4f())
+print(f4m())
