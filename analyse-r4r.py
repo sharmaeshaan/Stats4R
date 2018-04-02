@@ -17,6 +17,7 @@ def sanitise():
     cur.execute('DELETE FROM posts_breakdown WHERE age IS NULL')
     conn.commit()
 
+# average age
 def mean_age():
     ages = list()
     for i in posts():
@@ -24,18 +25,48 @@ def mean_age():
     mean_age = statistics.mean(ages)
     return int(mean_age)
 
+# total no. of males
+def total_males():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ?', ('m', ))
+    males = cur.fetchall()
+    return len(males)
+
+# total no. of females
+def total_females():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ?', ('f', ))
+    females = cur.fetchall()
+    return len(females)
+
+# no. of males seeking females
 def m4f():
     cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('m', 'f', ))
     m4f = cur.fetchall()
     return len(m4f)
 
+# no. of males seeking males
+def m4m():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('m', 'm', ))
+    m4m = cur.fetchall()
+    return len(m4m)
+
+# no. of females seeking males
 def f4m():
     cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('f', 'm', ))
     f4m = cur.fetchall()
     return len(f4m)
+
+# no. of females seeking females
+def f4f():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('f', 'f', ))
+    f4f = cur.fetchall()
+    return len(f4f)
 
 posts()
 # sanitise()
 print(mean_age())
 print(m4f())
 print(f4m())
+print(total_males())
+print(total_females())
+print(m4m())
+print(f4f())
