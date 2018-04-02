@@ -1,5 +1,6 @@
 import sqlite3
 import time
+import statistics
 
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur = conn.cursor()
@@ -16,16 +17,14 @@ def sanitise():
     cur.execute('DELETE FROM posts_breakdown WHERE age IS NULL')
     conn.commit()
 
-def extract():
-    posts_data = cur.execute('SELECT * FROM posts_breakdown')
-    for i in posts_data:
-        time.sleep(0.2)
-        print(len(i[3]))
+def mean_age():
+    ages = list()
+    for i in posts():
+        ages.append(i[3])
+    mean_age = statistics.mean(ages)
+    print(int(mean_age))
+
 
 posts()
-sanitise()
-# extract()
-# for i in posts():
-#     # time.sleep(0.3)
-#     print(i[3])
-#     print('\n')
+# sanitise()
+mean_age()
