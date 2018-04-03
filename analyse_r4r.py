@@ -5,10 +5,6 @@ import statistics
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur = conn.cursor()
 
-def posts():
-    posts_data = cur.execute('SELECT * FROM posts_breakdown')
-    return posts_data
-
 def sanitise():
     # delete entries where sex and seeking columns contain anything other than m, f, r or t
     cur.execute('DELETE FROM posts_breakdown WHERE seeking != ? AND seeking != ? AND seeking!= ? AND seeking!= ?', ('m', 'f', 'r', 't', ))
@@ -19,11 +15,12 @@ def sanitise():
 
 # average age
 def mean_age():
-    ages = list()
-    for i in posts():
-        ages.append(i[3])
-    mean_age = statistics.mean(ages)
-    return int(mean_age)
+    ages_tuple = cur.execute('SELECT age FROM posts_breakdown')
+    ages_list = list()
+    for i in ages_tuple:
+        ages_list.append(i[0])
+    mean = int(statistics.mean(ages_list))
+    return mean
 
 # total no. of males
 def total_males():
@@ -61,12 +58,11 @@ def f4f():
     f4f = cur.fetchall()
     return len(f4f)
 
-# posts()
-# # sanitise()
-# print('Average age: ', mean_age())
-# print('Men seeking women: ', m4f())
-# print('Women seeking men: ', f4m())
-# print('Total men: ', total_males())
-# print('Total women: ', total_females())
-# print('Men seeking men: ', m4m())
-# print('Women seeking women: ', f4f())
+# sanitise()
+print('Average age: ', mean_age())
+print('Men seeking women: ', m4f())
+print('Women seeking men: ', f4m())
+print('Total men: ', total_males())
+print('Total women: ', total_females())
+print('Men seeking men: ', m4m())
+print('Women seeking women: ', f4f())
