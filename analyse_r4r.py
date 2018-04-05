@@ -22,6 +22,24 @@ def mean_age():
     mean = int(statistics.mean(ages_list))
     return mean
 
+# average age of females
+def mean_age_f():
+    f_ages = cur.execute('SELECT age FROM posts_breakdown WHERE sex="f";')
+    ages_list = list()
+    for i in f_ages:
+        ages_list.append(i[0])
+    mean_f = int(statistics.mean(ages_list))
+    return mean_f
+
+# average age of females
+def mean_age_m():
+    m_ages = cur.execute('SELECT age FROM posts_breakdown WHERE sex="m";')
+    ages_list = list()
+    for i in m_ages:
+        ages_list.append(i[0])
+    mean_m = int(statistics.mean(ages_list))
+    return mean_m
+
 # total no. of males
 def total_males():
     cur.execute('SELECT * FROM posts_breakdown WHERE sex = ?', ('m', ))
@@ -60,6 +78,8 @@ def f4f():
 
 # sanitise()
 print('Average age: ', mean_age())
+print('Average age of women: ', mean_age_f())
+print('Average age of men: ', mean_age_m())
 print('Men seeking women: ', m4f())
 print('Women seeking men: ', f4m())
 print('Total men: ', total_males())
