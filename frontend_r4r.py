@@ -29,7 +29,7 @@ def seeking():
     plt.show()
 
 def m2f_ages():
-    ages = {'Average Age Males':mean_age_m(), 'Average Age Females':mean_age_f()}
+    ages = {'Males':mean_age_m(), 'Females':mean_age_f()}
     names = list(ages.keys())
     values = list(ages.values())
     # define plot size dimensions
@@ -42,6 +42,8 @@ def m2f_ages():
     axes.yaxis.grid(True)
     # set size of market with 's'
     plt.scatter(names, values, s=200)
+    # set label names
+    plt.ylabel('Average Age')
     plt.show()
 
 m2f_ages()
