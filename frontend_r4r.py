@@ -17,3 +17,10 @@ def m2f():
     ax1.axis('equal')
 
     plt.show()
+
+def m4f_f4m():
+    names = ['m4f', 'f4m']
+    values = [m4f(), f4m()]
+    plt.subplot(131)
+    plt.bar(names, values)
+    plt.show()
