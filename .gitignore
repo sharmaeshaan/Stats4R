@@ -3,3 +3,6 @@
 
 # ignore pycache folder
 __pycache__/
+
+#ignore static folder
+static/
