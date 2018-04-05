@@ -18,9 +18,15 @@ def m2f():
 
     plt.show()
 
-def m4f_f4m():
-    names = ['m4f', 'f4m']
-    values = [m4f(), f4m()]
-    plt.subplot(131)
-    plt.bar(names, values)
+def seeking():
+    seeking = {'Males\nseeking\nFemales':m4f(), 'Females\nseeking\nMales':f4m(), 'Males\nseeking\nMales':m4m(), 'Females\nseeking\nFemales':f4f()}
+    names = list(seeking.keys())
+    values = list(seeking.values())
+
+    plt.subplot(121)
+    plt.bar(range(len(seeking)), values, tick_label = names, align='center')
+    # plt.xticks(rotation='75')
+    # plt.subplots_adjust(bottom=0.3)
     plt.show()
+
+seeking()
