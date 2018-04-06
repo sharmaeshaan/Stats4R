@@ -1,0 +1,10 @@
+/* spacing around h1 */
+div.h2-space {
+    padding : 25px;
+    text-align : center;
+}
+
+div.col-centered {
+    float: none;
+    margin: 0 auto;
+}
