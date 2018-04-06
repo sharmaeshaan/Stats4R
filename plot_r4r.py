@@ -15,7 +15,7 @@ def m2f():
     ax1.pie(sizes, labels=labels, startangle=90, autopct='%1.1f%%')
     ax1.axis('equal')
 
-    plt.savefig('static/m2f.png', format='png')
+    plt.savefig('static/m2f.png', format='png', transparent=True)
 
 def seeking():
     seeking = {'Males\nseeking\nFemales':m4f(), 'Females\nseeking\nMales':f4m(), 'Males\nseeking\nMales':m4m(), 'Females\nseeking\nFemales':f4f()}
@@ -23,10 +23,9 @@ def seeking():
     values = list(seeking.values())
     # define plot size dimensions
     fig2, ax2 = plt.subplots()
-    ax2.bar(range(len(seeking)), values, tick_label = names, align='center')
+    ax2.bar(range(len(seeking)), values, tick_label = names, align='center', color='#b8a0ff')
     # plt.xticks(rotation='75')
-    # plt.subplots_adjust(bottom=0.3)
-    plt.savefig('static/seeking.png', format='png')
+    plt.savefig('static/seeking.png', format='png', transparent=True)
 
 def ages():
     ages = {'Males':mean_age_m(), 'Females':mean_age_f()}
@@ -41,10 +40,10 @@ def ages():
     # show horizontal grid lines
     axes.yaxis.grid(True)
     # set size of market with 's'
-    ax3.scatter(names2, values2, s=200)
+    ax3.scatter(names2, values2, s=200, color='#ff6f71')
     # set label names
     plt.ylabel('Average Age')
-    plt.savefig('static/ages.png', format='png')
+    plt.savefig('static/ages.png', format='png', transparent=True)
 
 m2f()
 seeking()
