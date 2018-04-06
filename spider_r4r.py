@@ -11,6 +11,9 @@ cur_2 = conn_2.cursor()
 conn_3 = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur_3 = conn_3.cursor()
 
+#set header for spider requests
+set_header = {'user-agent':'r4r-analysis'}
+
 def spider_pages(x):
     # create first table
     cur_1.execute('CREATE TABLE IF NOT EXISTS pages_list (id INTEGER PRIMARY KEY AUTOINCREMENT, page_url BLOB, page_html BLOB)')
@@ -19,7 +22,6 @@ def spider_pages(x):
     print("Spider initialized at ", start_url)
     # manually place first link and page html in db
     # target server will block requests from program without user agent details
-    set_header = {'user-agent':'r4r-analysis'}
     get_start_url = requests.get(start_url, headers = set_header)
     # requests module fetches page as bytes so .text needed to convert to text
     soup = BeautifulSoup(get_start_url.text, 'html.parser')
@@ -55,7 +57,7 @@ def spider_pages(x):
 
 def scrape_posts():
     # create second table
-    cur_2.execute('CREATE TABLE IF NOT EXISTS posts_list (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB UNIQUE)')
+    cur_2.execute('CREATE TABLE IF NOT EXISTS posts_list (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB UNIQUE, post_html BLOB)')
     # fetch downloaded pages from first db
     pages = cur_1.execute('SELECT page_url, page_html FROM pages_list')
 
@@ -75,11 +77,18 @@ def scrape_posts():
                 print('Scraping: ', post_url)
                 print(post_title_contents)
                 # time.sleep(1)
+                # extract html of each individual post page
+                try:
+                    post_page = requests.get(post_url, headers=set_header)
+                    post_page_soup = BeautifulSoup(post_page.text, 'html.parser')
+                    post_page_html = str(post_page_soup.prettify())
+                except:
+                    print('***Cannot fetch post page html. Oh well, moving on...***')
                 # table inserts inside 'try/except' since unique constraint on post title can glitch
                 try:
                     cur_2.execute('''
-                    INSERT OR IGNORE INTO posts_list (post_url, post_title) VALUES (?, ?)
-                    ''', (post_url, post_title_contents, ))
+                    INSERT OR IGNORE INTO posts_list (post_url, post_title, post_html) VALUES (?, ?, ?)
+                    ''', (post_url, post_title_contents, post_page_html))
                     conn_2.commit()
                     print('--Inserted--')
                 except:
@@ -123,5 +132,5 @@ def breakdown_posts():
     conn_3.commit()
 
 # spider_pages("https://www.reddit.com/r/r4r")
-# scrape_posts()
-breakdown_posts()
+scrape_posts()
+# breakdown_posts()
