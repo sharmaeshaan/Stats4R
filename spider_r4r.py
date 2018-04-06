@@ -105,7 +105,7 @@ def breakdown_posts():
         post_page_html = i[2]
         post_title = i[1]
         post_title_split = post_title.split(' ')
-        # if age is int then enter if else then enter null/none
+        # if age is int then enter else enter null/none
         try:
             age = int(post_title_split[0])
         except:
@@ -142,18 +142,32 @@ def breakdown_posts():
             post_final_upvote = int(post_upvote_number.contents[0])
         except:
             print('Could not process upvote count')
+        try:
+            post_commentarea = post_page_soup.find('div', class_='commentarea')
+            commentarea_titlearea = post_commentarea.find('div', class_='panestack-title')
+            comment_title = commentarea_titlearea.find('span', class_='title')
+            comment_number_text = comment_title.contents[0]
+            if comment_number_text == "no comments (yet)":
+                comment_number = 0
+            else:
+                comment_number_text_list = comment_number_text.split(' ')
+                comment_number = comment_number_text_list[1]
+        except:
+            print('Could not process comment number')
+            pass
 
-        time.sleep(1)
         print(post_title)
         print(age)
         print(sex)
         print(seeking)
         print(post_date)
         print(post_final_upvote)
+        print(comment_number)
         print('\n')
-    #     cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking) VALUES (?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, ))
-    # conn_3.commit()
+        cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking, comments_number,final_upvotes, post_date) VALUES (?,?,?,?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, comment_number, post_final_upvote, post_date))
+    conn_3.commit()
+    print('Broken down and inserted')
 
-# spider_pages("https://www.reddit.com/r/r4r")
-# scrape_posts()
+spider_pages("https://www.reddit.com/r/r4r")
+scrape_posts()
 breakdown_posts()
