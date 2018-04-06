@@ -5,14 +5,6 @@ import statistics
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur = conn.cursor()
 
-def sanitise():
-    # delete entries where sex and seeking columns contain anything other than m, f, r or t
-    cur.execute('DELETE FROM posts_breakdown WHERE seeking != ? AND seeking != ? AND seeking!= ? AND seeking!= ?', ('m', 'f', 'r', 't', ))
-    cur.execute('DELETE FROM posts_breakdown WHERE sex != ? AND sex != ? AND sex!= ? AND sex!= ?', ('m', 'f', 'r', 't', ))
-    # delete entries where age is not an integer
-    cur.execute('DELETE FROM posts_breakdown WHERE age IS NULL')
-    conn.commit()
-
 # average age
 def mean_age():
     ages_tuple = cur.execute('SELECT age FROM posts_breakdown')
@@ -76,7 +68,6 @@ def f4f():
     f4f = cur.fetchall()
     return len(f4f)
 
-# sanitise()
 print('Average age: ', mean_age())
 print('Average age of women: ', mean_age_f())
 print('Average age of men: ', mean_age_m())

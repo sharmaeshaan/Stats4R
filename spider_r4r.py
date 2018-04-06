@@ -88,12 +88,12 @@ def scrape_posts():
                     cur_2.execute('''
                     INSERT OR IGNORE INTO posts_list (post_url, post_title, post_html) VALUES (?, ?, ?)
                     ''', (post_url, post_title_contents, post_page_html))
-                    conn_2.commit()
-                    print('--Inserted--')
                 except:
                     print('***Cannot insert in DB. Oh well, moving on...***')
             except:
                 print('***Oops, cannot process <div>, moving on...***')
+        conn_2.commit()
+        print('--Inserted--')
 
 def breakdown_posts():
     # create third table
@@ -155,19 +155,29 @@ def breakdown_posts():
         except:
             print('Could not process comment number')
             pass
-
-        print(post_title)
-        print(age)
-        print(sex)
-        print(seeking)
-        print(post_date)
-        print(post_final_upvote)
-        print(comment_number)
-        print('\n')
+        # print(post_title)
+        # print(age)
+        # print(sex)
+        # print(seeking)
+        # print(post_date)
+        # print(post_final_upvote)
+        # print(comment_number)
+        # print('\n')
         cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking, comments_number,final_upvotes, post_date) VALUES (?,?,?,?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, comment_number, post_final_upvote, post_date))
     conn_3.commit()
-    print('Broken down and inserted')
+    print('--Inserted--')
+
+def sanitise():
+    # delete entries where sex and seeking columns contain anything other than m, f, r or t
+    cur_3.execute('DELETE FROM posts_breakdown WHERE seeking != ? AND seeking != ? AND seeking!= ? AND seeking!= ?', ('m', 'f', 'r', 't', ))
+    cur_3.execute('DELETE FROM posts_breakdown WHERE sex != ? AND sex != ? AND sex!= ? AND sex!= ?', ('m', 'f', 'r', 't', ))
+    # delete entries where age is not an integer
+    cur_3.execute('DELETE FROM posts_breakdown WHERE age IS NULL')
+    conn_3.commit()
+    print('Sanitized')
+
 
 spider_pages("https://www.reddit.com/r/r4r")
 scrape_posts()
 breakdown_posts()
+sanitise()
