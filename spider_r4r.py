@@ -80,8 +80,7 @@ def scrape_posts():
                 # extract html of each individual post page
                 try:
                     post_page = requests.get(post_url, headers=set_header)
-                    post_page_soup = BeautifulSoup(post_page.text, 'html.parser')
-                    post_page_html = str(post_page_soup.prettify())
+                    post_page_html = str(post_page.text)
                 except:
                     print('***Cannot fetch post page html. Oh well, moving on...***')
                 # table inserts inside 'try/except' since unique constraint on post title can glitch
@@ -98,11 +97,12 @@ def scrape_posts():
 
 def breakdown_posts():
     # create third table
-    cur_3.execute('CREATE TABLE IF NOT EXISTS posts_breakdown (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_title BLOB, age INTEGER, location BLOB, sex BLOB, seeking BLOB)')
+    cur_3.execute('CREATE TABLE IF NOT EXISTS posts_breakdown (id INTEGER PRIMARY KEY AUTOINCREMENT, post_url BLOB, post_date BLOB, comments_number INT, final_upvotes INT, post_title BLOB, age INTEGER, location BLOB, sex BLOB, seeking BLOB)')
     # fetch posts from second table
-    posts = cur_2.execute('SELECT post_url, post_title FROM posts_list')
+    posts = cur_2.execute('SELECT post_url, post_title, post_html FROM posts_list')
     for i in posts:
         post_url = i[0]
+        post_page_html = i[2]
         post_title = i[1]
         post_title_split = post_title.split(' ')
         # if age is int then enter if else then enter null/none
@@ -123,14 +123,37 @@ def breakdown_posts():
         except:
             print('Error processing post category: ', post_title)
             pass
-        # time.sleep(1)
+        post_page_soup = BeautifulSoup(post_page_html, 'html.parser')
+        try:
+            pageinfo = post_page_soup.find('div', class_='linkinfo')
+        except:
+            print('Could not get page info')
+            pass
+        try:
+            post_timestamp_block = pageinfo.find('div', class_='date')
+            post_timestamp = post_timestamp_block.find('time')
+            post_date = str(post_timestamp.contents[0])
+        except:
+            print('Could not process timestamp')
+            pass
+        try:
+            post_score = pageinfo.find('div', class_='score')
+            post_upvote_number = post_score.find('span', class_='number')
+            post_final_upvote = int(post_upvote_number.contents[0])
+        except:
+            print('Could not process upvote count')
+
+        time.sleep(1)
         print(post_title)
         print(age)
         print(sex)
         print(seeking)
-        cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking) VALUES (?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, ))
-    conn_3.commit()
+        print(post_date)
+        print(post_final_upvote)
+        print('\n')
+    #     cur_3.execute('INSERT OR IGNORE INTO posts_breakdown (post_url, post_title, age, location, sex, seeking) VALUES (?,?,?,?,?,?)', (post_url, post_title, age, location, sex, seeking, ))
+    # conn_3.commit()
 
 # spider_pages("https://www.reddit.com/r/r4r")
-scrape_posts()
-# breakdown_posts()
+# scrape_posts()
+breakdown_posts()
