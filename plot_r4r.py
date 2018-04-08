@@ -55,7 +55,18 @@ def upvotes():
     # plt.xticks(rotation='75')
     plt.savefig('static/upvotes.png', format='png', transparent=True)
 
-m2f()
-seeking()
-ages()
-upvotes()
+def comments():
+    mean_comments = {'Average Comments\nto\nMales':malecomments(), 'Average Comments\nto\nFemales':femalecomments()}
+    names = list(mean_comments.keys())
+    values = list(mean_comments.values())
+    # define plot size dimensions
+    fig2, ax2 = plt.subplots()
+    ax2.bar(range(len(mean_comments)), values, tick_label = names, align='center', color='#b8a0ff')
+    # plt.xticks(rotation='75')
+    plt.savefig('static/comments.png', format='png', transparent=True)
+
+# m2f()
+# seeking()
+# ages()
+# upvotes()
+comments()
