@@ -68,12 +68,30 @@ def f4f():
     f4f = cur.fetchall()
     return len(f4f)
 
+def maleupvotes():
+    upvotes = cur.execute('SELECT final_upvotes FROM posts_breakdown WHERE sex = ?', ('m',))
+    upvotes_list = list()
+    for i in upvotes:
+        upvotes_list.append(i[0])
+    mean_upvotes = statistics.mean(upvotes_list)
+    return int(mean_upvotes)
+
+def femaleupvotes():
+    upvotes = cur.execute('SELECT final_upvotes FROM posts_breakdown WHERE sex = ?', ('f',))
+    upvotes_list = list()
+    for i in upvotes:
+        upvotes_list.append(i[0])
+    mean_upvotes = statistics.mean(upvotes_list)
+    return int(mean_upvotes)
+
+print('Total men: ', total_males())
+print('Total women: ', total_females())
 print('Average age: ', mean_age())
 print('Average age of women: ', mean_age_f())
 print('Average age of men: ', mean_age_m())
 print('Men seeking women: ', m4f())
 print('Women seeking men: ', f4m())
-print('Total men: ', total_males())
-print('Total women: ', total_females())
 print('Men seeking men: ', m4m())
 print('Women seeking women: ', f4f())
+print('Average upvotes score of posts by males: ', maleupvotes())
+print('Average upvotes score of posts by females: ', femaleupvotes())
