@@ -6,6 +6,16 @@ from decimal import Decimal
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur = conn.cursor()
 
+# start and end date of posts to be analysed 
+def dates():
+    # get the post_date column order it as ascending and get the first record
+    cur.execute('SELECT post_date FROM posts_breakdown ORDER BY post_date ASC LIMIT 1')
+    # cur.fetchall() gets a tuple inside a list
+    start_date = cur.fetchall()[0][0]
+    cur.execute('SELECT post_date FROM posts_breakdown ORDER BY post_date DESC LIMIT 1')
+    end_date = cur.fetchall()[0][0]
+    return {'start date':start_date, 'end date':end_date}
+
 # average age
 def mean_age():
     ages_tuple = cur.execute('SELECT age FROM posts_breakdown')
@@ -123,3 +133,4 @@ def femalecomments():
 # print('Average upvotes score of posts by females: ', femaleupvotes())
 # print('Average number of comments on posts by males: ', malecomments())
 # print('Average number of comments on posts by males: ', femalecomments())
+# print('Start date and End date: ', dates())
