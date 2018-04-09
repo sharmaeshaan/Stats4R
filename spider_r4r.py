@@ -17,7 +17,6 @@ set_header = {'user-agent':'r4r-analysis'}
 def spider_pages(x):
     # create first table
     cur_1.execute('CREATE TABLE IF NOT EXISTS pages_list (id INTEGER PRIMARY KEY AUTOINCREMENT, page_url BLOB, page_html BLOB)')
-
     start_url = x
     print("Spider initialized at ", start_url)
     # manually place first link and page html in db
@@ -176,8 +175,7 @@ def sanitise():
     conn_3.commit()
     print('Sanitized')
 
-
-spider_pages("https://www.reddit.com/r/r4r")
+spider_pages('https://www.reddit.com/r/r4r')
 scrape_posts()
 breakdown_posts()
 sanitise()

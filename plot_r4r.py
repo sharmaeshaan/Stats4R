@@ -2,10 +2,8 @@ import sqlite3
 from analyse_r4r import mean_age_f, mean_age_m, total_males, total_females, m4f, m4m, f4f, f4m, maleupvotes, femaleupvotes, malecomments, femalecomments
 import matplotlib.pyplot as plt
 
-
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur = conn.cursor()
-
 
 def m2f():
     labels = 'Males', 'Females'
@@ -51,7 +49,7 @@ def upvotes():
     values = list(mean_upvotes.values())
     # define plot size dimensions
     fig2, ax2 = plt.subplots()
-    ax2.bar(range(len(mean_upvotes)), values, tick_label = names, align='center', color='#b8a0ff')
+    ax2.bar(range(len(mean_upvotes)), values, tick_label = names, align='center', color='#ffba2f')
     # plt.xticks(rotation='75')
     plt.savefig('static/upvotes.png', format='png', transparent=True)
 
@@ -61,7 +59,7 @@ def comments():
     values = list(mean_comments.values())
     # define plot size dimensions
     fig2, ax2 = plt.subplots()
-    ax2.bar(range(len(mean_comments)), values, tick_label = names, align='center', color='#b8a0ff')
+    ax2.bar(range(len(mean_comments)), values, tick_label = names, align='center', color='#a880ff')
     # plt.xticks(rotation='75')
     plt.savefig('static/comments.png', format='png', transparent=True)
 
