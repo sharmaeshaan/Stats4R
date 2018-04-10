@@ -63,27 +63,39 @@ def total_trans():
 
 # no. of males seeking females
 def m4f():
-    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('m', 'f', ))
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? AND seeking = ?', ('m', 'f', ))
     m4f = cur.fetchall()
     return len(m4f)
 
 # no. of males seeking males
 def m4m():
-    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('m', 'm', ))
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? AND seeking = ?', ('m', 'm', ))
     m4m = cur.fetchall()
     return len(m4m)
 
+# no. of males seeking redditors
+def m4r():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex=? AND seeking = ?', ('m', 'r', ))
+    m4r = cur.fetchall()
+    return len(m4r)
+
 # no. of females seeking males
 def f4m():
-    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('f', 'm', ))
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? AND seeking = ?', ('f', 'm', ))
     f4m = cur.fetchall()
     return len(f4m)
 
 # no. of females seeking females
 def f4f():
-    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('f', 'f', ))
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? AND seeking = ?', ('f', 'f', ))
     f4f = cur.fetchall()
     return len(f4f)
+
+# no. of females seeking redditors
+def f4r():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex=? AND seeking = ?', ('f', 'r', ))
+    f4r = cur.fetchall()
+    return len(f4r)
 
 # average number of upvotes on posts by males
 def maleupvotes():
