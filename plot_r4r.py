@@ -63,7 +63,7 @@ def comments():
     # plt.xticks(rotation='75')
     plt.savefig('static/comments.svg', format='svg', transparent=True)
 
-m2f()
+population()
 seeking()
 ages()
 upvotes()
