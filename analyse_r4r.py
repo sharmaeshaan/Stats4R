@@ -55,6 +55,12 @@ def total_females():
     females = cur.fetchall()
     return len(females)
 
+# total no. of trans
+def total_trans():
+    cur.execute('SELECT * FROM posts_breakdown WHERE sex=?', ('t', ))
+    trans = cur.fetchall()
+    return len(trans)
+
 # no. of males seeking females
 def m4f():
     cur.execute('SELECT * FROM posts_breakdown WHERE sex = ? and seeking = ?', ('m', 'f', ))
