@@ -13,7 +13,7 @@ def m2f():
     ax1.pie(sizes, labels=labels, startangle=90, autopct='%1.1f%%')
     ax1.axis('equal')
 
-    plt.savefig('static/m2f.png', format='png', transparent=True)
+    plt.savefig('static/m2f.svg', format='svg', transparent=True)
 
 def seeking():
     seeking = {'Males\nseeking\nFemales':m4f(), 'Females\nseeking\nMales':f4m(), 'Males\nseeking\nMales':m4m(), 'Females\nseeking\nFemales':f4f()}
@@ -23,7 +23,7 @@ def seeking():
     fig2, ax2 = plt.subplots()
     ax2.bar(range(len(seeking)), values, tick_label = names, align='center', color='#b8a0ff')
     # plt.xticks(rotation='75')
-    plt.savefig('static/seeking.png', format='png', transparent=True)
+    plt.savefig('static/seeking.svg', format='svg', transparent=True)
 
 def ages():
     ages = {'Males':mean_age_m(), 'Females':mean_age_f()}
@@ -41,7 +41,7 @@ def ages():
     ax3.scatter(names2, values2, s=200, color='#ff6f71')
     # set label names
     plt.ylabel('Average Age')
-    plt.savefig('static/ages.png', format='png', transparent=True)
+    plt.savefig('static/ages.svg', format='svg', transparent=True)
 
 def upvotes():
     mean_upvotes = {'Average Upvotes\nto\nMales':maleupvotes(), 'Average Upvotes\nto\nFemales':femaleupvotes()}
@@ -51,7 +51,7 @@ def upvotes():
     fig2, ax2 = plt.subplots()
     ax2.bar(range(len(mean_upvotes)), values, tick_label = names, align='center', color='#ffba2f')
     # plt.xticks(rotation='75')
-    plt.savefig('static/upvotes.png', format='png', transparent=True)
+    plt.savefig('static/upvotes.svg', format='svg', transparent=True)
 
 def comments():
     mean_comments = {'Average Comments\nto\nMales':malecomments(), 'Average Comments\nto\nFemales':femalecomments()}
@@ -61,7 +61,7 @@ def comments():
     fig2, ax2 = plt.subplots()
     ax2.bar(range(len(mean_comments)), values, tick_label = names, align='center', color='#a880ff')
     # plt.xticks(rotation='75')
-    plt.savefig('static/comments.png', format='png', transparent=True)
+    plt.savefig('static/comments.svg', format='svg', transparent=True)
 
 m2f()
 seeking()
