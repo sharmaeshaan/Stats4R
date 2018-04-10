@@ -1,19 +1,19 @@
 import sqlite3
-from analyse_r4r import mean_age_f, mean_age_m, total_males, total_females, m4f, m4m, f4f, f4m, maleupvotes, femaleupvotes, malecomments, femalecomments
+from analyse_r4r import mean_age_f, mean_age_m, total_males, total_females, total_trans, m4f, m4m, f4f, f4m, maleupvotes, femaleupvotes, malecomments, femalecomments
 import matplotlib.pyplot as plt
 
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
 cur = conn.cursor()
 
-def m2f():
-    labels = 'Males', 'Females'
-    sizes = [total_males(), total_females()]
+def population():
+    labels = 'Males', 'Females', 'Trans'
+    sizes = [total_males(), total_females(), total_trans()]
     # create new figure and axis
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, labels=labels, startangle=90, autopct='%1.1f%%')
     ax1.axis('equal')
 
-    plt.savefig('static/m2f.svg', format='svg', transparent=True)
+    plt.savefig('static/population.svg', format='svg', transparent=True)
 
 def seeking():
     seeking = {'Males\nseeking\nFemales':m4f(), 'Females\nseeking\nMales':f4m(), 'Males\nseeking\nMales':m4m(), 'Females\nseeking\nFemales':f4f()}
