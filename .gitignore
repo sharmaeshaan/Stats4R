@@ -6,6 +6,3 @@ __pycache__/
 
 #ignore static folder
 static/
-
-#ignore readme
-readme.md

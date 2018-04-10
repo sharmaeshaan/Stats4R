@@ -63,8 +63,8 @@ def comments():
     # plt.xticks(rotation='75')
     plt.savefig('static/comments.png', format='png', transparent=True)
 
-# m2f()
-# seeking()
-# ages()
-# upvotes()
+m2f()
+seeking()
+ages()
+upvotes()
 comments()
