@@ -1,5 +1,5 @@
 import sqlite3
-from analyse_r4r import mean_age_f, mean_age_m, total_males, total_females, total_trans, m4f, m4m, f4f, f4m, maleupvotes, femaleupvotes, malecomments, femalecomments
+from analyse_r4r import mean_age_f, mean_age_m, total_males, total_females, total_trans, m4f, m4m, f4f, f4m, m4r, f4r, maleupvotes, femaleupvotes, malecomments, femalecomments
 import matplotlib.pyplot as plt
 
 conn = sqlite3.connect('r4r_posts_breakdown.sqlite')
@@ -16,13 +16,15 @@ def population():
     plt.savefig('static/population.svg', format='svg', transparent=True)
 
 def seeking():
-    seeking = {'Males\nseeking\nFemales':m4f(), 'Females\nseeking\nMales':f4m(), 'Males\nseeking\nMales':m4m(), 'Females\nseeking\nFemales':f4f()}
+    seeking = {'Males\nseeking\nFemales':m4f(), 'Females\nseeking\nMales':f4m(), 'Males\nseeking\nMales':m4m(), 'Females\nseeking\nFemales':f4f(), 'Males\nseeking\nRedditors':m4r(), 'Females\nseeking\nRedditors':f4r()}
     names = list(seeking.keys())
     values = list(seeking.values())
     # define plot size dimensions
-    fig2, ax2 = plt.subplots()
+    fig2, ax2 = plt.subplots(figsize=(20, 10))
     ax2.bar(range(len(seeking)), values, tick_label = names, align='center', color='#b8a0ff')
     # plt.xticks(rotation='75')
+    plt.xticks(fontsize=19)
+    plt.yticks(fontsize=17)
     plt.savefig('static/seeking.svg', format='svg', transparent=True)
 
 def ages():
@@ -63,8 +65,8 @@ def comments():
     # plt.xticks(rotation='75')
     plt.savefig('static/comments.svg', format='svg', transparent=True)
 
-population()
+# population()
 seeking()
-ages()
-upvotes()
-comments()
+# ages()
+# upvotes()
+# comments()
