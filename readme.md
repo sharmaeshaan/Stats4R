@@ -2,9 +2,11 @@
 
 Stats4R shows you the vital statistics of [Reddit's most popular online dating sub.](https://www.reddit.com/r/r4r)
 
-## Getting Started
+It is a web scraper and data analysis program written specefically for [/r/r4r](https://www.reddit.com/r/r4r).
 
-### Requirements
+# Getting Started
+
+## Requirements
 
 Stats4R is built with **Python 3**.  You can check your version of Python by entering the following command in a terminal window:
 ```
@@ -12,8 +14,11 @@ python --version
 ```
 If your system does not have Python or has Python 2, please [download and install]((https://www.python.org/downloads/)) the latest version of Python 3.
 
-**The following Python libraries are also required:**
-
+**The following Python libraries are required to run Stats4R:**
+- [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup)
+```
+pip install beautifulsoup4
+```
 - [Requests](http://docs.python-requests.org/en/master/user/install/#install)
 ```
 pip install requests
@@ -28,7 +33,9 @@ pip install Flask
 ```
 *If you have the [Anaconda distribution of Python](https://www.anaconda.com/download/) you won't need to install the above requirements.*
 
-### Running Stats4R
+--- 
+
+## Running Stats4R
 
 Running Stats4R is simple.
 ### MacOS and Linux
@@ -39,6 +46,8 @@ Running Stats4R is simple.
 ```
 ./stats4r.sh
 ```
+4. Sit back and wait. Depending on your internet connection Stats4R should take approximately 5 - 15 minutes to crawl 25 pages of [/r/r4r](https://www.reddit.com/r/r4r) and analyze about 600 posts
+
 4. Open your browser and go to http://127.0.0.1:5000/
 
 To quit, press `ctrl + c` in the terminal window where the program is running.
@@ -46,10 +55,4 @@ To quit, press `ctrl + c` in the terminal window where the program is running.
 ### Windows
 *Work in progress*
 
-## How it Works
-
-
-
-## Screenshot
-
-## Dependencies 
+---
