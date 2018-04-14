@@ -10,7 +10,10 @@
         <div class='container'>
 
             <!-- Title -->
-            <h2>Results of r4r posts between {{ startdate }} and {{ enddate }}</h2>
+            <div class='my-4'>
+                <h2>Results of r4r posts between {{ startdate }} and {{ enddate }}</h2>
+            </div>
+
             <!-- Section 1 -->
             <div  style="background:#f2f5f7" class='jumbotron'>
                 <h3>Demographics</h3>
@@ -20,14 +23,14 @@
                         <!-- figure tag for caption enabled images -->
                         <figure class='figure'>
                             <img src='../static/population.svg' class="figure-img img-fluid" alt="Responsive image">
-                            <figcaption class='figure-caption'>Generic Caption</figcaption>
+                            <figcaption class='figure-caption'>Overall gender composition on subreddit</figcaption>
                         </figure>
                     </div>
                     <!-- average age -->
                     <div class='col-6'>
                         <figure class='figure'>
                             <img src='../static/ages.svg' class="figure-img img-fluid" alt="Responsive image"> 
-                            <figcaption class='figure-caption'>Generic Caption</figcaption>
+                            <figcaption class='figure-caption'>Average ages of female and male users</figcaption>
                         </figure>
                     </div>
                 </div>
@@ -37,11 +40,11 @@
             <div  style="background:#f2f5f7" class='jumbotron'>
                 <h3>Who's Seeking Who</h3>
                 <div class='row'>
-                    <!-- Seeking stats -->
+                    <!-- seeking -->
                     <div class='col'>
                         <figure class='figure'>
                             <img src='../static/seeking.svg' class="figure-img img-fluid" alt="Responsive image">
-                            <figcaption class='figure-caption'>Generic Caption</figcaption>
+                            <figcaption class='figure-caption'>Number of gender x seeking gender y. In cases where gender x doesn't have a specific preference of who she/he is looking for, they mention 'redditor'</figcaption>
                         </figure>
                     </div>
                 </div>
@@ -51,18 +54,18 @@
             <div  style="background:#f2f5f7" class='jumbotron'>
                 <h3>Interaction</h3>
                 <div class='row'>
-                    <!-- upvotes bar -->
+                    <!-- upvotes  -->
                     <div class='col-6'>
                         <figure class='figure'>
                             <img src='../static/upvotes.svg' class="figure-img img-fluid" alt="Responsive image">
-                            <figcaption class='figure-caption'>Generic Caption</figcaption>
+                            <figcaption class='figure-caption'>Average number of upvotes to posts created by males as opposed to posts by females</figcaption>
                         </figure>
                     </div>
-                    <!-- comments bar -->
+                    <!-- comments  -->
                     <div class='col-6'>
                         <figure class='figure'>
                             <img src='../static/comments.svg' class="figure-img img-fluid" alt="Responsive image"> 
-                            <figcaption class='figure-caption'>Generic Caption</figcaption>
+                            <figcaption class='figure-caption'>Average number of comments on posts created by males as opposed to posts by females</figcaption>
                         </figure>
                     </div>
                 </div>   

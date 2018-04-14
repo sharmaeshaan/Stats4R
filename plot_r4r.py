@@ -46,7 +46,7 @@ def ages():
     plt.savefig('static/ages.svg', format='svg', transparent=True)
 
 def upvotes():
-    mean_upvotes = {'Average Upvotes\nto\nMales':maleupvotes(), 'Average Upvotes\nto\nFemales':femaleupvotes()}
+    mean_upvotes = {'Upvotes\nto\nMales':maleupvotes(), 'Upvotes\nto\nFemales':femaleupvotes()}
     names = list(mean_upvotes.keys())
     values = list(mean_upvotes.values())
     # define plot size dimensions
@@ -56,7 +56,7 @@ def upvotes():
     plt.savefig('static/upvotes.svg', format='svg', transparent=True)
 
 def comments():
-    mean_comments = {'Average Comments\nto\nMales':malecomments(), 'Average Comments\nto\nFemales':femalecomments()}
+    mean_comments = {'Comments\nto\nMales':malecomments(), 'Comments\nto\nFemales':femalecomments()}
     names = list(mean_comments.keys())
     values = list(mean_comments.values())
     # define plot size dimensions
@@ -65,8 +65,8 @@ def comments():
     # plt.xticks(rotation='75')
     plt.savefig('static/comments.svg', format='svg', transparent=True)
 
-# population()
+population()
 seeking()
-# ages()
-# upvotes()
-# comments()
+ages()
+upvotes()
+comments()
