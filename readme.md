@@ -12,6 +12,8 @@ It is a web scraper and data analysis program written specefically for [/r/r4r](
 - Average comments on posts by males VS females
 - Average upvotes to posts by males VS females
 
+[ *Screenshot of features in action* ](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/fullcap.png)
+
 ---
 
 # Getting Started
@@ -79,10 +81,6 @@ python front_r4r.py
 _A `.bat` file will be created soon to run the program with a single command._
 
 ---
-
-# Screenshot
-
-![App running](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/fullcap.png)
 
 # Contributing
 
