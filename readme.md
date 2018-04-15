@@ -82,7 +82,7 @@ _A `.bat` file will be created soon to run the program with a single command._
 
 # Screenshot
 
-![App running](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/fullcapture.png)
+![App running](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/fullcap.png)
 
 # Contributing
 
