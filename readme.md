@@ -10,7 +10,7 @@ It is a web scraper and data analysis program written specefically for [/r/r4r](
 __Gender Distribution__
 ![Gender distribution plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/population.png")
 __Average Age__
-![Average age plot]("Stats4R/screenshots/ages.png")
+![Average age plot]("https://raw.githubusercontent.com/sharmaeshaan/Stats4R/dev/screenshots/ages.png")
 ### Who's Seeking Who
 ![Who's seeking who plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/seeking.png")
 ### Interaction
