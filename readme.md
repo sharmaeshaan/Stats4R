@@ -11,6 +11,7 @@ It is a web scraper and data analysis program written specefically for [/r/r4r](
 - Who's seeking who
 - Average comments on posts by males VS females
 - Average upvotes to posts by males VS females
+- Dataset containing hundreds of r4r posts 
 
 [ *Screenshot of features in action* ](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/fullcap.png)
 
