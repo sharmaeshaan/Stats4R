@@ -4,20 +4,13 @@ Stats4R shows you the vital statistics of [Reddit's most popular online dating s
 
 It is a web scraper and data analysis program written specefically for [/r/r4r](https://www.reddit.com/r/r4r).
 
-# Features
+## Features
 
-### Demographics
-- __Gender Distribution__
-![Gender distribution plot](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/population.png)
-- __Average Age__
-![Average age plot](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/ages.png)
-### Who's Seeking Who
-![Who's seeking who plot](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/seeking.png)
-### Interaction
-- __Comments on Posts: Males VS Females__
-![Average comments plot](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/comments.png)
-- __Upvotes to Posts: Males VS Females__
-![Average upvotes plot](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/upvotes.png)
+- Gender composition
+- Average age of males VS females
+- Who's seeking who
+- Average comments on posts by males VS females
+- Average upvotes to posts by males VS females
 
 ---
 
@@ -86,6 +79,10 @@ python front_r4r.py
 _A `.bat` file will be created soon to run the program with a single command._
 
 ---
+
+# Screenshot
+
+![App running](https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/fullcapture.png)
 
 # Contributing
 
