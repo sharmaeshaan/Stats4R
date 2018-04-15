@@ -55,8 +55,7 @@ pip install Flask
 ## Running Stats4R
 
 Running Stats4R is simple.
-### MacOS and Linux
-
+### __MacOS and Linux__
 1. Download the repository and unzip it to your desired location
 2. Navigate to the unzipped folder and open a terminal window
 3. Enter the command below:
@@ -69,11 +68,27 @@ Running Stats4R is simple.
 
 To quit, press `ctrl + c` in the terminal window where the program is running.
 
-### Windows
-*Work in progress*
+### __Windows__
+
+Windows users can run Stats4R by running the Python scripts __in the following sequence__, with the commands below:
+```
+python spider_r4r.py
+```
+```
+python analyse_r4r.py
+```
+```
+python plot_r4r.py
+```
+```
+python front_r4r.py
+```
+_A `.bat` file will be created soon to run the program with a single command._
 
 ---
 
 # Screenshot
 
 ![]("")
+
+# Contributing
