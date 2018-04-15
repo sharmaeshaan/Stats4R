@@ -4,6 +4,23 @@ Stats4R shows you the vital statistics of [Reddit's most popular online dating s
 
 It is a web scraper and data analysis program written specefically for [/r/r4r](https://www.reddit.com/r/r4r).
 
+# Features
+
+### Demographics
+__Gender Distribution__
+![]("")
+__Average Age__
+![]("")
+### Who's Seeking Who
+![]("")
+### Interaction
+__Comments on Posts: Males VS Females__
+![]("")
+__Upvotes to Posts: Males VS Females__
+![]("")
+
+---
+
 # Getting Started
 
 ## Requirements
@@ -46,9 +63,9 @@ Running Stats4R is simple.
 ```
 ./stats4r.sh
 ```
-4. Sit back and wait. Depending on your internet connection Stats4R should take approximately 5 - 15 minutes to crawl 25 pages of [/r/r4r](https://www.reddit.com/r/r4r) and analyze about 600 posts
+4. Sit back and wait. Depending on your internet connection Stats4R should take approximately 20 minutes to crawl 25 pages of [/r/r4r](https://www.reddit.com/r/r4r) and analyze about 600 posts
 
-4. Open your browser and go to http://127.0.0.1:5000/
+4. Open your browser and go to http://localhost:5000/ or http://127.0.0.1:5000/
 
 To quit, press `ctrl + c` in the terminal window where the program is running.
 
@@ -56,3 +73,7 @@ To quit, press `ctrl + c` in the terminal window where the program is running.
 *Work in progress*
 
 ---
+
+# Screenshot
+
+![]("")
