@@ -8,16 +8,16 @@ It is a web scraper and data analysis program written specefically for [/r/r4r](
 
 ### Demographics
 __Gender Distribution__
-![]("")
+![Gender distribution plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/population.svg")
 __Average Age__
-![]("")
+![Average age plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/ages.svg")
 ### Who's Seeking Who
-![]("")
+![Who's seeking who plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/seeking.svg")
 ### Interaction
 __Comments on Posts: Males VS Females__
-![]("")
+![Average comments plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/comments.svg")
 __Upvotes to Posts: Males VS Females__
-![]("")
+![Average upvotes plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/upvotes.svg")
 
 ---
 
@@ -87,8 +87,12 @@ _A `.bat` file will be created soon to run the program with a single command._
 
 ---
 
-# Screenshot
-
-![]("")
-
 # Contributing
+
+Please feel free to make pull requests or fork the repo. 
+
+For any feature requests or suggestions, send a message at sharmaeshaanw@gmail.com -- critical feedback is welcome!
+
+Star the repo if you liked the project :star:
+
+If you're interested in doing something similar to Stats4R, I'd love to talk about it!  :raised_hands:
