@@ -8,16 +8,16 @@ It is a web scraper and data analysis program written specefically for [/r/r4r](
 
 ### Demographics
 __Gender Distribution__
-![Gender distribution plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/population.svg")
+![Gender distribution plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/population.png")
 __Average Age__
-![Average age plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/ages.svg")
+![Average age plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/ages.png")
 ### Who's Seeking Who
-![Who's seeking who plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/seeking.svg")
+![Who's seeking who plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/seeking.png")
 ### Interaction
 __Comments on Posts: Males VS Females__
-![Average comments plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/comments.svg")
+![Average comments plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/comments.png")
 __Upvotes to Posts: Males VS Females__
-![Average upvotes plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/upvotes.svg")
+![Average upvotes plot]("https://github.com/sharmaeshaan/Stats4R/blob/dev/screenshots/upvotes.png")
 
 ---
 
